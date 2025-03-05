@@ -16,14 +16,14 @@ function createCard(cardData, deleteFn) {
 
   const deleteButton = card.querySelector('.card__delete-button');
   deleteButton.addEventListener('click', deleteFn);
-  deleteButton.targetElement = card;
 
   return card;
 }
 
 // Функция удаления карточки
 function deleteCard(event) {
-  event.currentTarget.targetElement.remove();
+  const card = event.target.closest('.card');
+  card.remove();
 }
 
 // Вывести карточки на страницу
