@@ -29,6 +29,8 @@ const formNewPlace = document.querySelector('[name="new-place"]');
 // Открытая карточка
 const popupImage = document.querySelector('.popup_type_image');
 const popupImageClose = document.querySelector('.popup_type_image .popup__close');
+const popupCaption = popupImage.querySelector('.popup__caption');
+const popupImg = popupImage.querySelector('.popup__image');
 
 function showCard(cardData) {
   return createCard(cardData, deleteCard, likeCard, openImagePopup);
@@ -39,11 +41,9 @@ initialCards.forEach((cardData) => {
 });
 
 function openImagePopup(event){
-  popupImage.querySelector('.popup__image').removeAttribute('src');
-  popupImage.querySelector('.popup__caption').textContent =
-    event.target.parentElement.querySelector('.card__title').textContent;
-  popupImage.querySelector('.popup__image').setAttribute('src', event.target.src);
-  popupImage.querySelector('.popup__image').setAttribute('alt', event.target.alt);
+  popupCaption.textContent = event.target.parentElement.querySelector('.card__title').textContent;
+  popupImg.setAttribute('src', event.target.src);
+  popupImg.setAttribute('alt', event.target.alt);
   openModal(popupImage);
 }
 
@@ -69,7 +69,7 @@ popupImageClose.addEventListener('click', function() {
   closeModal(popupImage);
 })
 
-function editProfileSubmit(event) {
+function submitEditProfileForm(event) {
   event.preventDefault();
   const name = popupInputName.value;
   const description = popupInputDescription.value;
@@ -78,7 +78,7 @@ function editProfileSubmit(event) {
   closeModal(popupEdit);
 }
 
-function newPlaceSubmit(event) {
+function submitAddCardForm(event) {
   event.preventDefault();
   const cardName = popupInputCardName.value;
   const url = popupInputUrl.value;
@@ -87,5 +87,5 @@ function newPlaceSubmit(event) {
   closeModal(popupNewCard);
 }
 
-formEditProfile.addEventListener('submit', editProfileSubmit);
-formNewPlace.addEventListener('submit', newPlaceSubmit);
+formEditProfile.addEventListener('submit', submitEditProfileForm);
+formNewPlace.addEventListener('submit', submitAddCardForm);

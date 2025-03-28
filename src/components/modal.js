@@ -1,10 +1,8 @@
 // Функция открытия модального окна
 export function openModal(popup) {
-	if (!popup.classList.contains('popup_is-opened')) {
-		popup.classList.add('popup_is-opened');
-		popup.addEventListener('click', closeModalByOverlay);
-		document.addEventListener('keydown', closeModalEscape);
-	}
+  popup.classList.add('popup_is-opened');
+  popup.addEventListener('click', closeModalByOverlay);
+  document.addEventListener('keydown', closeModalEscape);
 }
 
 // Функция закрытия модального окна
