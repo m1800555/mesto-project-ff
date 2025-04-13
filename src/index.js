@@ -2,6 +2,7 @@ import './pages/index.css';
 import { initialCards } from './scripts/cards-data.js';
 import { createCard, deleteCard, likeCard } from './components/card.js';
 import { closeModal, openModal } from './components/modal.js';
+import { enableValidation, clearValidation } from './components/validation.js';
 
 // Секция профиль
 const profileTitle = document.querySelector('.profile__title');
@@ -31,6 +32,18 @@ const popupImage = document.querySelector('.popup_type_image');
 const popupImageClose = document.querySelector('.popup_type_image .popup__close');
 const popupCaption = popupImage.querySelector('.popup__caption');
 const popupImg = popupImage.querySelector('.popup__image');
+
+// Валидация
+const validationConfig = {
+	formSelector: '.popup__form',
+	inputSelector: '.popup__input',
+	submitButtonSelector: '.popup__button',
+	inactiveButtonClass: 'popup__button_disabled',
+	inputErrorClass: 'popup__input_type_error',
+	errorClass: 'popup__error_visible',
+}
+
+enableValidation(validationConfig);
 
 function showCard(cardData) {
   return createCard(cardData, deleteCard, likeCard, openImagePopup);
@@ -76,6 +89,7 @@ function submitEditProfileForm(event) {
   profileTitle.textContent = name;
   profileDescription.textContent = description;
   closeModal(popupEdit);
+  clearValidation(formEditProfile, validationConfig);
 }
 
 function submitAddCardForm(event) {
@@ -85,6 +99,7 @@ function submitAddCardForm(event) {
   placesList.prepend(showCard({name: cardName, link: url}));
   formNewPlace.reset();
   closeModal(popupNewCard);
+  clearValidation(formNewPlace, validationConfig);
 }
 
 formEditProfile.addEventListener('submit', submitEditProfileForm);
