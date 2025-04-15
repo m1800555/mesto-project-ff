@@ -23,8 +23,7 @@ export function createCard(cardData, userId, deleteFn, likeFn, openImagePopupFn)
     deleteButton.remove();
   }
 
-  const likesCount = cardTemplate.querySelector('.card__like-count');
-  likesCount.textContent = cardData.likes.length;
+  card.querySelector('.card__like-count').textContent = cardData.likes.length;
 
   const likeButton = card.querySelector('.card__like-button')
 	likeButton.addEventListener('click', likeFn);

@@ -69,14 +69,17 @@ function openImagePopup(event){
 editProfileButton.addEventListener('click', function() {
   popupInputName.value = profileTitle.textContent;
   popupInputDescription.value = profileDescription.textContent;
+  clearValidation(formEditProfile, validationConfig);
   openModal(popupProfileEdit);
 });
 
 addCardButton.addEventListener('click', function() {
+  clearValidation(formNewPlace, validationConfig);
   openModal(popupNewCard);
 });
 
 profileAvatarEdit.addEventListener('click', function() {
+  clearValidation(formEditAvatar, validationConfig);
   openModal(popupAvatar);
 });
 
@@ -107,7 +110,6 @@ function submitEditProfileForm(event) {
     profileTitle.textContent = userData.name;
     profileDescription.textContent = userData.about;
     closeModal(popupProfileEdit);
-    clearValidation(formEditProfile, validationConfig);
   })
   .catch((err) => {
     console.log(err);
@@ -129,7 +131,6 @@ function submitAddCardForm(event) {
       placesList.prepend(showCard(cardData, userId));
       formNewPlace.reset();
       closeModal(popupNewCard);
-      clearValidation(formNewPlace, validationConfig);
     })
     .catch((err) => {
       console.log(err);
@@ -150,7 +151,6 @@ function submitEditAvatarForm(event){
       profileAvatar.style.backgroundImage = `url(${avatarData.avatar})`;
       formEditAvatar.reset();
       closeModal(popupAvatar);
-      clearValidation(formEditAvatar, validationConfig);
     })
     .catch((err) => {
       console.log(err);
